@@ -26,8 +26,8 @@ const main = async ({ token_id }) => {
       chainId: shortString.encodeShortString('SN_SEPOLIA'), // shortString of 'SN_GOERLI' (or 'SN_MAIN'), to be sure that signature can't be used by other network.
     },
     message: {
-      user_address: '0x63616c6c65725f61646472657373',
-      nft_contract_address: '0x6e8522a2b09895f76bae60aee06349eb1acc4590760453ddb8d56e85c89ca76',
+      user_address: '0x6D696E746572',
+      nft_contract_address: '0x4b2002e8832df0cc7ea21b98f2a23f5236aae211ee777e3e5cb97932d50018a',
       token_id: uint256.bnToUint256(token_id),
     },
   };

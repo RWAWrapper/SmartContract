@@ -80,7 +80,9 @@ mod NFTWrapper {
         0x1bfc207425a47a5dfa1a50a4f5241203f50624ca5fdf5e18755765416b8e288;
     // sn_keccak!("Unwrap(user_address:felt,nft_contract_address:felt,token_id:u256)u256(low:felt,high:felt)")
     const UNWRAP_TYPE_HASH: felt252 =
-        selector!("Unwrap(user_address:felt,nft_contract_address:felt,token_id:u256)u256(low:felt,high:felt)");
+        selector!(
+            "Unwrap(user_address:felt,nft_contract_address:felt,token_id:u256)u256(low:felt,high:felt)"
+        );
     const U256_TYPE_HASH: felt252 = selector!("u256(low:felt,high:felt)");
 
 
@@ -336,10 +338,7 @@ mod NFTWrapper {
         token_id: u256
     ) -> felt252 {
         let mut send_message_inputs = array![
-            UNWRAP_TYPE_HASH,
-            user_address.into(),
-            nft_contract_address.into(),
-            hash_u256(token_id)
+            UNWRAP_TYPE_HASH, user_address.into(), nft_contract_address.into(), hash_u256(token_id)
         ]
             .span();
         let send_message_hash = pedersen_hash_span(elements: send_message_inputs);
