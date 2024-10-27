@@ -50,6 +50,8 @@ pub trait INFTWrapper<TContractState> {
     fn get_signer(self: @TContractState) -> ContractAddress;
     fn change_signer(ref self: TContractState, signer: ContractAddress);
     // fn calc_domain_hash(self: @TContractState) -> felt252;
+    fn get_wrapped_token(self: @TContractState, nft_contract: ContractAddress) -> ContractAddress;
+    fn get_dex_pool(self: @TContractState, nft_contract: ContractAddress) -> ContractAddress;
 }
 
 #[starknet::contract]
@@ -410,5 +412,15 @@ mod NFTWrapper {
             .unwrap_syscall();
         self.dex_pool.entry(nft_contract).write(dex_pool_contract_address);
         dex_pool_contract_address
+    }
+
+    #[external(v0)]
+    fn get_wrapped_token(self: @ContractState, nft_contract: ContractAddress) -> ContractAddress {
+        self.wrapped_token.entry(nft_contract).read()
+    }
+
+    #[external(v0)]
+    fn get_dex_pool(self: @ContractState, nft_contract: ContractAddress) -> ContractAddress {
+        self.dex_pool.entry(nft_contract).read()
     }
 }
